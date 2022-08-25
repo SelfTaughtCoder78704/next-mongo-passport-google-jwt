@@ -3,10 +3,11 @@ import JWT from 'jsonwebtoken';
 import connect from "../lib/database";
 import User from '../models/User';
 import { useRouter } from 'next/router';
+import Component from '../models/Component';
 
 
 export default function Dashboard({ email, name, components }) {
-  console.log(email, name);
+  console.log(email, name, components);
   const router = useRouter();
   const logout = () => {
     removeCookies('token');
@@ -18,17 +19,18 @@ export default function Dashboard({ email, name, components }) {
       <p>Welcome {name}</p>
       <p>{email}</p>
       <button className='btn' onClick={logout}>Logout</button>
-      <div class="component-info">
+      <div className="component-info">
         <h2>Your Components</h2>
+        <a className='btn' href="/new-component">Create a component</a>
         {components && components.map(component => (
-          <div class="component">
-            <h3>{component.name}</h3>
+          <div className="component" key={component._id}>
+            <h3>{component.title}</h3>
           </div>
         ))}
         {components.length <= 0 ? (
-          <div class="no-component">
+          <div className="no-component">
             <h3>No components found</h3>
-            <a className='btn' href="/api/create">Create a component</a>
+
           </div>
         ) : null}
 
@@ -45,13 +47,15 @@ export async function getServerSideProps({ req, res }) {
     if (!token) return { redirect: { destination: '/' } };
 
     const verified = await JWT.verify(token, process.env.JWT_SECRET);
-    const user = await User.findOne({ _id: verified.id });
+    const user = await User.findOne({ _id: verified.id })
+    const components = await Component.find({ creator: verified.id })
+    console.log(components)
     if (!user) return { redirect: { destination: '/' } };
     return {
       props: {
         email: user.email,
         name: user.name,
-        components: user.components
+        components: JSON.parse(JSON.stringify(components))
       }
     };
 
