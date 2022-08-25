@@ -13,11 +13,11 @@ export default function Dashboard({ email, name, components }) {
     router.replace('/');
   }
   return (
-    <div>
+    <div className='dashboard'>
       <h1>Dashboard</h1>
       <p>Welcome {name}</p>
       <p>{email}</p>
-      <button onClick={logout}>Logout</button>
+      <button className='btn' onClick={logout}>Logout</button>
       <div class="component-info">
         <h2>Your Components</h2>
         {components && components.map(component => (
@@ -26,7 +26,7 @@ export default function Dashboard({ email, name, components }) {
           </div>
         ))}
         {components.length <= 0 ? (
-          <div class="component">
+          <div class="no-component">
             <h3>No components found</h3>
             <a className='btn' href="/api/create">Create a component</a>
           </div>
@@ -46,7 +46,6 @@ export async function getServerSideProps({ req, res }) {
 
     const verified = await JWT.verify(token, process.env.JWT_SECRET);
     const user = await User.findOne({ _id: verified.id });
-    console.log(user);
     if (!user) return { redirect: { destination: '/' } };
     return {
       props: {

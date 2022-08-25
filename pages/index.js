@@ -5,13 +5,17 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className="home">
       <Head>
         <title>Component Tracker</title>
         <meta name="description" content="create components and share with friends/coworkers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <a href='/api/google'>Login with Google</a>
+      <div className='container'>
+        <h1 >Welcome to the Component Tracker</h1>
+        <p>Create components and share with friends/coworkers</p>
+        <a className='btn' href='/api/google'>Login with Google</a>
+      </div>
     </div>
   )
 }
