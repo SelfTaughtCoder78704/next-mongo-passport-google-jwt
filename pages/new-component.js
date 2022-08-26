@@ -5,7 +5,7 @@ import User from '../models/User';
 // import Component from '../../../models/Component';
 
 
-export default function NewComponent({ email, name, components }) {
+export default function NewComponent({ email, name }) {
   console.log(email, name);
 
   return (
