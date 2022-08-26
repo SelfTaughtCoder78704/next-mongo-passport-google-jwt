@@ -4,6 +4,7 @@ import connect from "../lib/database";
 import User from '../models/User';
 import { useRouter } from 'next/router';
 import Component from '../models/Component';
+import Link from 'next/link';
 
 
 
@@ -23,8 +24,10 @@ export default function Dashboard({ email, name, components }) {
       <div className="component-info">
         <h2>Your Components</h2>
 
-        <a href="/new-component" className='btn'>Create a new component</a>
-
+        {/* <a href="/new-component" className='btn'>Create a new component</a> */}
+      <Link href="/new-component">
+        <a className='btn'>Create a new component</a>
+      </Link>
         {components && components.map(component => (
           <div className="component" key={component._id}>
             <h3>{component.title}</h3>

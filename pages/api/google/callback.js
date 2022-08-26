@@ -3,7 +3,7 @@ import passport from "passport";
 import { setCookies } from "cookies-next";
 import '../../../lib/passport';
 
-export default async function (req, res, next) {
+export default async function  handler(req, res, next) {
   await connect();
   await passport.authenticate('google', (err, user, info) => {
     if (err || !user) res.redirect('http://localhost:3000/?a=auth_fail');

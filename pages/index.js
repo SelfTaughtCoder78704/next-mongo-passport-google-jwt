@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { getCookie, removeCookies } from 'cookies-next';
-
+import Link from 'next/link';
 
 
 export default function Home() {
@@ -17,8 +17,10 @@ export default function Home() {
         <p>Create components and share with friends/coworkers</p>
 
 
-        <a href="/api/google" className='btn' >Login with Google</a>
-
+        {/* <a href="/api/google" className='btn' >Login with Google</a> */}
+        <Link href="/api/google">
+          <a className='btn'>Login with Google</a>
+        </Link>
       </div>
     </div>
   )
