@@ -4,6 +4,7 @@ import connect from "../lib/database";
 import User from '../models/User';
 import { useRouter } from 'next/router';
 import Component from '../models/Component';
+import { Link } from 'next/link'
 
 
 export default function Dashboard({ email, name, components }) {
@@ -21,7 +22,9 @@ export default function Dashboard({ email, name, components }) {
       <button className='btn' onClick={logout}>Logout</button>
       <div className="component-info">
         <h2>Your Components</h2>
-        <a className='btn' href="/new-component">Create a component</a>
+        <Link href="/new-component">
+          <a className='btn'>Create a new component</a>
+        </Link>
         {components && components.map(component => (
           <div className="component" key={component._id}>
             <h3>{component.title}</h3>
