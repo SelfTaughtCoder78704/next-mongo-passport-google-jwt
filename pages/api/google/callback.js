@@ -3,12 +3,12 @@ import passport from "passport";
 import { setCookies } from "cookies-next";
 import '../../../lib/passport';
 
-export default async function  handler(req, res, next) {
+export default async function handler(req, res, next) {
   await connect();
   await passport.authenticate('google', (err, user, info) => {
-    if (err || !user) res.redirect('http://localhost:3000/?a=auth_fail');
+    if (err || !user) res.redirect('https://next-mongo-passport-google-jtmlgesfr-selftaughtcoder78704.vercel.app/?a=auth_fail');
 
     setCookies('token', info.token, { req, res });
-    res.redirect('http://localhost:3000/dashboard');
+    res.redirect('https://next-mongo-passport-google-jtmlgesfr-selftaughtcoder78704.vercel.app/dashboard');
   })(req, res, next);
 }
