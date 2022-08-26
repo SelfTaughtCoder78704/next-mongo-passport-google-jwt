@@ -6,9 +6,9 @@ import '../../../lib/passport';
 export default async function handler(req, res, next) {
   await connect();
   await passport.authenticate('google', (err, user, info) => {
-    if (err || !user) res.redirect('https://next-mongo-passport-google-jtmlgesfr-selftaughtcoder78704.vercel.app/?a=auth_fail');
+    if (err || !user) res.redirect('/?a=auth_fail');
 
     setCookies('token', info.token, { req, res });
-    res.redirect('https://next-mongo-passport-google-jtmlgesfr-selftaughtcoder78704.vercel.app/dashboard');
+    res.redirect('/dashboard');
   })(req, res, next);
 }
