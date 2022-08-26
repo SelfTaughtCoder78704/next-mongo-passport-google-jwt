@@ -2,7 +2,7 @@ import passport from "passport";
 import connect from "../../../lib/database";
 import '../../../lib/passport';
 
-export default async function (req, res, next) {
+export default async function indexStarter(req, res, next) {
   await connect();
   await passport.authenticate('google', {
     scope: ['profile', 'email'],
